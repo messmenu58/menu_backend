@@ -10,3 +10,7 @@ app.listen(process.env.PORT, function () {
   require('./admin-sdk');
 });
 
+app.use('/', (req, res) => {
+  res.send('I am running!');
+});
+
