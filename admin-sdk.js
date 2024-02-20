@@ -76,6 +76,7 @@ function getStartTime(time_in_string){
 }
 
 async function scheduleRespectiveMeal(cronExpression,title,msg){
+  console.log(cronExpression);
   cron.schedule(cronExpression,async()=>{
     await sendCustomMessage(title,msg);
   })
@@ -101,7 +102,10 @@ async function scheduleDaily(){
   const cronExpressionSnacks = `${timeSnacks[1]} ${timeSnacks[0]} ${date.getDate()} ${date.getMonth() + 1} *`; 
   const cronExpressionDinner = `${timeDinner[1]} ${timeDinner[0]} ${date.getDate()} ${date.getMonth() + 1} *`; 
 
-
+  console.log(cronExpressionBreakfast);
+  console.log(cronExpressionLunch);
+  console.log(cronExpressionSnacks);
+  console.log(cronExpressionDinner);
 
   scheduleRespectiveMeal(cronExpressionBreakfast,"Breakfast",menu["Breakfast"]);
   scheduleRespectiveMeal(cronExpressionLunch,"Lunch",menu["Lunch"]);
@@ -112,7 +116,7 @@ async function scheduleDaily(){
 
 
 
-cron.schedule('0 6 * * *', async() => {
+cron.schedule('* * * * *', async() => {
   scheduleDaily();
 }, {
 scheduled: true,
