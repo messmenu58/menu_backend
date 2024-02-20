@@ -119,7 +119,7 @@ async function scheduleDaily(){
 
 
 
-cron.schedule('0 12 * * *', async() => {
+cron.schedule('30 11 * * *', async() => {
   scheduleDaily();
 }, {
 scheduled: true,
