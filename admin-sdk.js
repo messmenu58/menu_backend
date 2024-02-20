@@ -79,6 +79,9 @@ async function scheduleRespectiveMeal(cronExpression,title,msg){
   console.log(cronExpression);
   cron.schedule(cronExpression,async()=>{
     await sendCustomMessage(title,msg);
+  },{
+      scheduled: true,
+      timezone: 'Asia/kolkata', 
   })
 }
 
@@ -116,7 +119,7 @@ async function scheduleDaily(){
 
 
 
-cron.schedule('* * * * *', async() => {
+cron.schedule('0 6 * * *', async() => {
   scheduleDaily();
 }, {
 scheduled: true,
