@@ -32,23 +32,18 @@ async function sendCustomMessage(title, msg) {
 }
 
 
+const db = getFirestore();
+const Menu = db.collection('Menu');
+const Timings = db.collection("Timings");
+
+console.log("running");
+
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 function getWeekDay(){
     let indian_date = new Date().toLocaleString("en-Us", {timeZone: 'Asia/Kolkata'});
     let date = new Date(indian_date);
     return date.getDay();
 }
-
-
-
-const db = getFirestore();
-const Menu = db.collection('Menu');
-const Timings = db.collection("Timings");
-
-console.log("running");
-const weekday_number = getWeekDay();
-const weekday = daysOfWeek[weekday_number];
-
 
 function getStartTime(time_in_string){
 
@@ -85,8 +80,14 @@ async function scheduleRespectiveMeal(cronExpression,title,msg){
   })
 }
 
+
 async function scheduleDaily(){
+
+  const weekday_number = getWeekDay();
+  const weekday = daysOfWeek[weekday_number];
+
   console.log(weekday);
+
   const time = (await Timings.doc(weekday).get()).data();
   const menu = (await Menu.doc(weekday).get()).data();
 
