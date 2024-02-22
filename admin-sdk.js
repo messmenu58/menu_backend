@@ -134,7 +134,7 @@ async function scheduleDaily(){
 
 
 
-cron.schedule('* * * * *', async() => {
+cron.schedule('0 6 * * *', async() => {
   makeGetRequest();
   scheduleDaily();
 }, {
