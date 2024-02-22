@@ -3,13 +3,27 @@ const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/
 const serviceAccount = JSON.parse(process.env.serviceAccountKey);
 const cron = require('node-cron');
 const admin = require('firebase-admin');
-
+const axios = require('axios');
 
 initializeApp({
     credential: cert(serviceAccount)
   });
   
 
+function makeGetRequest(){
+  const url = 'https://menubackend58-dev-amne.3.us-1.fl0.io/';
+
+  axios.get(url)
+  .then(response => {
+    // Handle the response data here
+    console.log(response.data);
+  })
+  .catch(error => {
+  // Handle errors here
+  console.error('Error making GET request:', error.message);
+  })
+}
+  
 async function sendCustomMessage(title, msg) {
   const message = {
     notification: {
@@ -120,7 +134,8 @@ async function scheduleDaily(){
 
 
 
-cron.schedule('0 6 * * *', async() => {
+cron.schedule('* * * * *', async() => {
+  makeGetRequest();
   scheduleDaily();
 }, {
 scheduled: true,

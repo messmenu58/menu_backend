@@ -11,6 +11,7 @@ app.listen(process.env.PORT, function () {
 });
 
 app.use('/', (req, res) => {
+  console.log("get request");
   res.send('I am running!');
 });
 
