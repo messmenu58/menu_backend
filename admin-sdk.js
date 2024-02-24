@@ -16,6 +16,7 @@ function makeGetRequest(){
   axios.get(url)
   .then(response => {
     // Handle the response data here
+    console.log("success");
     console.log(response.data);
   })
   .catch(error => {
@@ -135,9 +136,15 @@ async function scheduleDaily(){
 
 
 cron.schedule('0 6 * * *', async() => {
-  makeGetRequest();
   scheduleDaily();
 }, {
 scheduled: true,
 timezone: 'Asia/kolkata', // Set your timezone (e.g., 'America/New_York')
+});
+
+cron.schedule('0 * * * *',async()=>{
+  makeGetRequest();
+},{
+  scheduled: true,
+  timezone: 'Asia/kolkata',
 });
