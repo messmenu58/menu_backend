@@ -15,3 +15,13 @@ app.use('/', (req, res) => {
   res.send('I am running!');
 });
 
+setInterval(() => {
+  axios({
+      method: 'get',
+      url: 'https://travel-companion-dev-jaea.2.sg-1.fl0.io'
+  }).then((result) => {
+      console.log(result);
+  }).catch((err) => {
+      console.log(err);
+  });;
+}, 21600000);
