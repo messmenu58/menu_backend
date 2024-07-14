@@ -10,20 +10,6 @@ initializeApp({
   });
   
 
-function makeGetRequest(){
-  const url = 'https://menubackend58-dev-amne.3.us-1.fl0.io/';
-
-  axios.get(url)
-  .then(response => {
-    // Handle the response data here
-    console.log("success");
-    console.log(response.data);
-  })
-  .catch(error => {
-  // Handle errors here
-  console.error('Error making GET request:', error.message);
-  })
-}
   
 async function sendCustomMessage(title, msg) {
   const message = {
@@ -142,9 +128,3 @@ scheduled: true,
 timezone: 'Asia/kolkata', // Set your timezone (e.g., 'America/New_York')
 });
 
-cron.schedule('0 * * * *',async()=>{
-  makeGetRequest();
-},{
-  scheduled: true,
-  timezone: 'Asia/kolkata',
-});
